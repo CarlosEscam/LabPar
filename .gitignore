@@ -5,3 +5,5 @@
 .env
 .DS_Store
 Thumbs.db
+# Copias locales que no forman parte del repositorio (paquete .zip y versiones anteriores)
+_fuera_del_repo/
