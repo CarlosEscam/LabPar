@@ -1,0 +1,69 @@
+slug: omp-02-pi-integracion
+titulo: Aproximación de π por integración numérica
+modelo: openmp
+lenguaje: c
+nivel: basico
+orden: 2
+duracion_estimada_min: 45
+resumen: >-
+  Integra 4/(1+x²) con la regla del punto medio. Decide el alcance de cada variable (private, shared,
+  reduction) y observa los efectos de la aritmética de coma flotante en paralelo.
+conceptos: [private, reduction, coma flotante, ley de Amdahl]
+objetivos:
+  - nivel: Comprender
+    texto: Distinguir variables compartidas y privadas en una región paralela.
+  - nivel: Aplicar
+    texto: Usar las cláusulas private y reduction para paralelizar una integración numérica.
+  - nivel: Evaluar
+    texto: Juzgar si una diferencia numérica entre la versión secuencial y la paralela es un error o un efecto del redondeo.
+config:
+  hilos_correccion: [1, 4]
+  repeticiones_correccion: 2
+  hilos_rendimiento: [1, 2, 4, 8]
+  repeticiones_rendimiento: 3
+  tiempo_limite_s: 10
+  comparacion: numerica
+  tolerancia_rel: 1.0e-9
+  tolerancia_abs: 1.0e-12
+  peso_correccion: 70
+  peso_rendimiento: 30
+  eficiencia_objetivo: 0.6
+  entrada_rendimiento: "300000000\n"
+  requisitos:
+    - patron: '#\s*pragma\s+omp\s+parallel'
+      mensaje: Usa al menos una región paralela de OpenMP (#pragma omp parallel …).
+casos:
+  - {nombre: Ejemplo del enunciado, archivo: 01-ejemplo, visible: true}
+  - {nombre: Un subintervalo, archivo: 02-uno, visible: true}
+  - {nombre: Mil subintervalos, archivo: 03-mil}
+  - {nombre: Un millón de subintervalos, archivo: 04-millon}
+  - {nombre: Cincuenta millones de subintervalos, archivo: 05-grande, peso: 2}
+pistas:
+  - "Una variable declarada fuera del for es compartida por defecto: usa private(x) o declárala dentro del bucle."
+  - La acumulación en suma necesita reduction(+:suma).
+  - Si con varios hilos obtienes valores muy distintos de π (por ejemplo 0,7 o 2,9), hay una condición de carrera.
+preguntas:
+  - pregunta: En la plantilla, ¿por qué `x` debe ser privada?
+    opciones:
+      - Porque OpenMP no permite variables double compartidas.
+      - Porque cada hilo calcula su propio x; si es compartida, otro hilo puede sobrescribirla antes de que se use.
+      - Porque las variables privadas son más rápidas de leer.
+      - No es necesario; basta con que suma sea una reducción.
+    correcta: 1
+    explicacion: >-
+      x es un temporal de cada iteración. Si es compartida, un hilo puede escribir su x entre la asignación
+      y el uso que hace otro hilo, y ese hilo sumaría el término equivocado.
+  - pregunta: La versión paralela imprime 3.141592653590 y la secuencial 3.141592653589. ¿Es un error?
+    opciones:
+      - Sí, la paralelización está mal hecha.
+      - No necesariamente; la suma en coma flotante no es asociativa y el orden cambia el redondeo.
+      - Sí, siempre debe coincidir hasta el último decimal.
+      - No, porque π es irracional.
+    correcta: 1
+    explicacion: >-
+      Con reduction cada hilo suma un subconjunto y luego se combinan los parciales; el orden distinto
+      produce diferencias del orden de 1e-12, que están dentro de la tolerancia.
+  - pregunta: Si el 95 % del tiempo es paralelizable, ¿cuál es la aceleración máxima según la ley de Amdahl?
+    opciones: ["95", "20", "Infinita", "1,05"]
+    correcta: 1
+    explicacion: Con infinitos procesadores S = 1 / (1 − f) = 1 / 0,05 = 20.

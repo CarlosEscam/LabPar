@@ -1,0 +1,67 @@
+slug: omp-01-suma-reduccion
+titulo: Suma paralela con reducción
+modelo: openmp
+lenguaje: c
+nivel: basico
+orden: 1
+duracion_estimada_min: 40
+resumen: >-
+  Paraleliza la suma de n valores con parallel for y evita la condición de carrera con la cláusula
+  reduction. Primer contacto con la aceleración y la eficiencia.
+conceptos: [parallel for, reduction, condición de carrera, aceleración]
+objetivos:
+  - nivel: Comprender
+    texto: Explicar por qué la actualización concurrente de una variable compartida produce resultados incorrectos.
+  - nivel: Aplicar
+    texto: Paralelizar un bucle con parallel for y la cláusula reduction.
+  - nivel: Analizar
+    texto: Interpretar la aceleración y la eficiencia obtenidas con distintos números de hilos.
+config:
+  hilos_correccion: [1, 4]
+  repeticiones_correccion: 2
+  hilos_rendimiento: [1, 2, 4, 8]
+  repeticiones_rendimiento: 3
+  tiempo_limite_s: 10
+  comparacion: exacta
+  peso_correccion: 70
+  peso_rendimiento: 30
+  eficiencia_objetivo: 0.6
+  entrada_rendimiento: "200000000 2026\n"
+  requisitos:
+    - patron: '#\s*pragma\s+omp\s+parallel'
+      mensaje: Usa al menos una región paralela de OpenMP (#pragma omp parallel …).
+casos:
+  - {nombre: Ejemplo del enunciado, archivo: 01-ejemplo, visible: true}
+  - {nombre: Un solo elemento, archivo: 02-un-elemento, visible: true}
+  - {nombre: Sin elementos, archivo: 03-vacio}
+  - {nombre: n primo (un millón), archivo: 04-millon}
+  - {nombre: Veinte millones de términos, archivo: 05-grande, peso: 2}
+pistas:
+  - Coloca `#pragma omp parallel for reduction(+:suma)` justo antes del for.
+  - La variable de control del bucle paralelizado es privada automáticamente.
+  - Si el resultado cambia entre ejecuciones con varios hilos, hay una condición de carrera.
+preguntas:
+  - pregunta: Dos hilos ejecutan a la vez `suma += x` sobre una variable compartida. ¿Qué puede ocurrir?
+    opciones:
+      - El compilador detecta el problema y no genera el programa.
+      - Una de las actualizaciones se pierde porque ambos hilos leen el mismo valor anterior.
+      - OpenMP serializa automáticamente la suma.
+      - "Nada: las sumas de enteros son atómicas en C."
+    correcta: 1
+    explicacion: >-
+      `suma += x` es leer, sumar y escribir. Si dos hilos leen el mismo valor antes de que el otro escriba,
+      una de las dos sumas se pierde. Es una condición de carrera.
+  - pregunta: ¿Qué hace la cláusula `reduction(+:suma)`?
+    opciones:
+      - Convierte cada suma en una operación atómica.
+      - Divide el valor de n entre el número de hilos.
+      - Da a cada hilo una copia privada de suma y al final combina las copias con +.
+      - Reduce la precisión de suma para ganar velocidad.
+    correcta: 2
+    explicacion: >-
+      Cada hilo acumula en su copia privada (inicializada en 0) sin sincronizarse; al terminar el bucle,
+      OpenMP combina las copias con el operador indicado.
+  - pregunta: Con p = 4 hilos tu programa tarda 0,30 s y la versión secuencial 1,00 s. ¿Cuál es la eficiencia?
+    opciones: ["3,33", "0,83", "0,30", "1,33"]
+    correcta: 1
+    explicacion: La aceleración es S = 1,00 / 0,30 ≈ 3,33 y la eficiencia E = S / p ≈ 3,33 / 4 ≈ 0,83.

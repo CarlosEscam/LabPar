@@ -1,0 +1,69 @@
+slug: mpi-01-suma-anillo
+titulo: Suma distribuida con paso de mensajes en anillo
+modelo: mpi
+lenguaje: c
+nivel: basico
+orden: 11
+duracion_estimada_min: 60
+resumen: >-
+  Reparte una suma entre procesos MPI con bloques balanceados y combina los resultados parciales con
+  MPI_Send y MPI_Recv en un anillo. Introduce el interbloqueo y la latencia de la comunicación.
+conceptos: [MPI_Send, MPI_Recv, reparto por bloques, interbloqueo]
+objetivos:
+  - nivel: Aplicar
+    texto: Repartir un rango de índices entre procesos con bloques balanceados cuando n no es divisible entre p.
+  - nivel: Aplicar
+    texto: Implementar comunicación punto a punto con MPI_Send y MPI_Recv.
+  - nivel: Analizar
+    texto: Reconocer las condiciones que producen un interbloqueo en un patrón de comunicación.
+config:
+  hilos_correccion: [1, 3, 4]
+  repeticiones_correccion: 1
+  hilos_rendimiento: [1, 2, 4, 8]
+  repeticiones_rendimiento: 3
+  tiempo_limite_s: 8
+  tiempo_limite_rendimiento_s: 40
+  comparacion: exacta
+  peso_correccion: 70
+  peso_rendimiento: 30
+  eficiencia_objetivo: 0.6
+  entrada_rendimiento: "200000000 2026\n"
+  requisitos:
+    - patron: '\bMPI_Send\s*\('
+      mensaje: Usa MPI_Send para enviar las sumas parciales.
+    - patron: '\bMPI_Recv\s*\('
+      mensaje: Usa MPI_Recv para recibir las sumas parciales.
+  prohibidos:
+    - patron: '\bMPI_(?:All)?[Rr]educe\s*\('
+      mensaje: En este laboratorio la combinación debe hacerse en anillo con MPI_Send/MPI_Recv, sin MPI_Reduce ni MPI_Allreduce.
+casos:
+  - {nombre: Ejemplo del enunciado, archivo: 01-ejemplo, visible: true}
+  - {nombre: Un solo elemento (n < p), archivo: 02-un-elemento, visible: true}
+  - {nombre: Sin elementos, archivo: 03-vacio}
+  - {nombre: n primo (un millón), archivo: 04-millon}
+  - {nombre: Veinte millones de términos, archivo: 05-grande, peso: 2}
+pistas:
+  - "Bloque del proceso k: inicio = k·b + min(k, r) y cantidad = b + (k < r ? 1 : 0), con b = n / p y r = n % p."
+  - El proceso 0 envía primero y recibe al final; los demás reciben primero y envían después. Así no hay interbloqueo.
+  - Con p = 1 no debe enviarse ningún mensaje.
+preguntas:
+  - pregunta: En un anillo, todos los procesos ejecutan primero MPI_Recv del anterior y luego MPI_Send al siguiente. ¿Qué ocurre?
+    opciones:
+      - El programa funciona, solo que más lento.
+      - Interbloqueo, porque todos esperan un mensaje que ninguno ha enviado.
+      - MPI reordena automáticamente las llamadas.
+      - El programa termina con un error de compilación.
+    correcta: 1
+    explicacion: >-
+      MPI_Recv es bloqueante: si todos esperan recibir antes de enviar, nadie avanza. Romper la simetría
+      (el proceso 0 envía primero) resuelve el problema.
+  - pregunta: Con n = 10 y p = 3, ¿cuántos índices recibe cada proceso con el reparto por bloques con resto?
+    opciones: ["3, 3 y 4", "4, 3 y 3", "3, 3 y 3 (se pierde uno)", "10, 0 y 0"]
+    correcta: 1
+    explicacion: b = 3 y r = 1, así que el proceso 0 recibe 4 índices y los procesos 1 y 2 reciben 3.
+  - pregunta: ¿Cuántos pasos de comunicación secuenciales necesita una reducción en árbol binario con p procesos?
+    opciones: ["p − 1", "log₂ p (redondeado hacia arriba)", "p²", "1"]
+    correcta: 1
+    explicacion: >-
+      En cada paso la mitad de los procesos activos envía su parcial a la otra mitad, por lo que bastan
+      ⌈log₂ p⌉ pasos. El anillo necesita p pasos en secuencia.

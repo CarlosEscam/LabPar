@@ -1,0 +1,66 @@
+slug: mpi-03-matriz-vector
+titulo: Producto matriz–vector distribuido (MPI_Gatherv)
+modelo: mpi
+lenguaje: c
+nivel: intermedio
+orden: 13
+duracion_estimada_min: 75
+resumen: >-
+  Reparte las filas de una matriz entre procesos, calcula y = A·x por bloques y reúne los resultados
+  con MPI_Gatherv usando recvcounts y displs. Analiza la relación entre cómputo y comunicación.
+conceptos: [MPI_Gatherv, MPI_Bcast, descomposición por filas, cómputo frente a comunicación]
+objetivos:
+  - nivel: Aplicar
+    texto: Calcular desplazamientos y conteos para reunir bloques de tamaño variable con MPI_Gatherv.
+  - nivel: Analizar
+    texto: Estimar la relación entre cómputo y comunicación de un algoritmo distribuido.
+  - nivel: Crear
+    texto: Diseñar la descomposición de datos de un producto matriz–vector para memoria distribuida.
+config:
+  hilos_correccion: [1, 3, 4]
+  repeticiones_correccion: 1
+  hilos_rendimiento: [1, 2, 4, 8]
+  repeticiones_rendimiento: 3
+  tiempo_limite_s: 8
+  tiempo_limite_rendimiento_s: 40
+  comparacion: numerica
+  tolerancia_rel: 1.0e-9
+  tolerancia_abs: 1.0e-6
+  peso_correccion: 70
+  peso_rendimiento: 30
+  eficiencia_objetivo: 0.6
+  entrada_rendimiento: "16000 16000\n"
+  requisitos:
+    - patron: '\bMPI_Gatherv\s*\('
+      mensaje: Reúne los bloques de y con MPI_Gatherv.
+casos:
+  - {nombre: Ejemplo del enunciado, archivo: 01-ejemplo, visible: true}
+  - {nombre: Una sola fila (m < p), archivo: 02-una-fila, visible: true}
+  - {nombre: m = 10, n = 7, archivo: 03-pequena}
+  - {nombre: m = 257 (no divisible), archivo: 04-impar}
+  - {nombre: 1000 × 1000, archivo: 05-grande, peso: 2}
+pistas:
+  - "Filas del proceso k: b + (k < r ? 1 : 0), con b = m / p y r = m % p."
+  - "displs[k] es la posición de la primera fila del proceso k: k·b + min(k, r)."
+  - recvcounts y displs solo se necesitan en el proceso raíz, pero todos los procesos deben llamar a MPI_Gatherv.
+preguntas:
+  - pregunta: ¿Para qué sirven recvcounts y displs en MPI_Gatherv?
+    opciones:
+      - Para indicar cuántos elementos aporta cada proceso y en qué posición del arreglo destino se colocan.
+      - Para fijar el número de procesos.
+      - Para definir el tipo de dato de cada elemento.
+      - Solo sirven para depuración.
+    correcta: 0
+    explicacion: A diferencia de MPI_Gather, la versión «v» permite que cada proceso aporte una cantidad distinta de datos.
+  - pregunta: Con m = 10 y p = 4, los bloques tienen 3, 3, 2 y 2 filas. ¿Cuáles son los desplazamientos?
+    opciones: ["0, 3, 6, 9", "0, 3, 6, 8", "0, 2, 4, 6", "3, 3, 2, 2"]
+    correcta: 1
+    explicacion: Cada desplazamiento es la suma de los tamaños de los bloques anteriores.
+  - pregunta: ¿Por qué este programa escala bien aunque haya comunicación?
+    opciones:
+      - Porque MPI_Gatherv no tiene costo.
+      - Porque el cómputo crece como m·n/p y la comunicación solo como m + n.
+      - Porque solo el proceso 0 trabaja.
+      - Porque los mensajes se envían en paralelo sin latencia.
+    correcta: 1
+    explicacion: Cuanto mayor es la relación entre cómputo y datos comunicados, menor es el peso relativo de la comunicación.

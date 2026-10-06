@@ -1,0 +1,76 @@
+slug: omp-03-primos-planificacion
+titulo: Conteo de primos y planificación de bucles
+modelo: openmp
+lenguaje: c
+nivel: intermedio
+orden: 3
+duracion_estimada_min: 60
+resumen: >-
+  Cuenta primos con división por tentativa, un bucle cuyas iteraciones tienen costos crecientes.
+  Compara las planificaciones static, dynamic y guided y analiza el desbalance de carga.
+conceptos: [schedule, desbalance de carga, reduction, métrica de Karp–Flatt]
+objetivos:
+  - nivel: Analizar
+    texto: Identificar el desbalance de carga a partir de la eficiencia medida con distintos números de hilos.
+  - nivel: Aplicar
+    texto: Usar las planificaciones static, dynamic y guided de OpenMP.
+  - nivel: Evaluar
+    texto: Seleccionar la planificación y el tamaño de bloque más adecuados para un bucle irregular.
+config:
+  hilos_correccion: [1, 4]
+  repeticiones_correccion: 2
+  hilos_rendimiento: [1, 2, 4, 8]
+  repeticiones_rendimiento: 3
+  tiempo_limite_s: 10
+  comparacion: exacta
+  peso_correccion: 60
+  peso_rendimiento: 40
+  eficiencia_objetivo: 0.85
+  entrada_rendimiento: "3000000\n"
+  requisitos:
+    - patron: '#\s*pragma\s+omp\s+parallel'
+      mensaje: Usa al menos una región paralela de OpenMP (#pragma omp parallel …).
+  pistas_rendimiento:
+    - "El costo de cada iteración crece con k: con schedule(static) el último hilo recibe el bloque más costoso. Prueba schedule(dynamic, 1000) o schedule(guided)."
+casos:
+  - {nombre: Ejemplo N = 10, archivo: 01-diez, visible: true}
+  - {nombre: Ejemplo N = 100, archivo: 02-cien, visible: true}
+  - {nombre: N = 1 (sin primos), archivo: 03-uno}
+  - {nombre: N = 2, archivo: 04-dos}
+  - {nombre: Cien mil, archivo: 05-cien-mil}
+  - {nombre: Un millón, archivo: 06-millon, peso: 2}
+pistas:
+  - "El conteo es una suma de unos: usa reduction(+:cuenta)."
+  - "Agrega la cláusula schedule al mismo #pragma omp parallel for: schedule(dynamic, 1000)."
+  - Compara la eficiencia de tus envíos con distintas planificaciones en la pestaña Historial.
+preguntas:
+  - pregunta: ¿Por qué schedule(static) reparte mal el trabajo en este problema?
+    opciones:
+      - Porque static no funciona con variables long long.
+      - Porque asigna bloques contiguos del mismo tamaño, pero probar números grandes cuesta más; el último hilo recibe el bloque más costoso.
+      - Porque static crea un hilo por iteración.
+      - Porque static no permite reducciones.
+    correcta: 1
+    explicacion: >-
+      El costo de es_primo(k) crece aproximadamente con √k. Con bloques contiguos, el hilo que recibe los
+      números más grandes trabaja más y todos esperan a que termine.
+  - pregunta: ¿Qué desventaja tiene schedule(dynamic, 1)?
+    opciones:
+      - Produce resultados incorrectos.
+      - Solo funciona con dos hilos.
+      - Cada iteración se reparte por separado y la sincronización para pedir trabajo agrega sobrecarga.
+      - Ninguna; siempre es la mejor opción.
+    correcta: 2
+    explicacion: >-
+      En dynamic los hilos piden bloques a una cola compartida. Con bloques de 1 iteración esas solicitudes
+      son tan frecuentes que su costo se nota; bloques de cientos o miles de iteraciones lo amortizan.
+  - pregunta: La métrica de Karp–Flatt aumenta al pasar de 2 a 4 hilos. ¿Qué sugiere?
+    opciones:
+      - Que el programa es incorrecto.
+      - Que la sobrecarga (desbalance o sincronización) crece con el número de hilos, no solo una fracción serial fija.
+      - Que la máquina tiene menos de 4 núcleos.
+      - Que conviene usar menos iteraciones.
+    correcta: 1
+    explicacion: >-
+      Si la fracción serial fuera la única limitación, la métrica sería aproximadamente constante.
+      Si crece con p, la pérdida de eficiencia viene de un costo que aumenta con p, como el desbalance de carga.

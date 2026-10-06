@@ -1,0 +1,72 @@
+# Integración continua (definición de terminado del proyecto): pruebas del backend con SQLite y PostgreSQL,
+# compilación de la interfaz y construcción de las imágenes de contenedor.
+name: Integración continua
+
+on:
+  push:
+    branches: [main]
+    paths: ["labpar/**", ".github/workflows/**"]
+  pull_request:
+    paths: ["labpar/**", ".github/workflows/**"]
+  workflow_dispatch:
+
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: labpar
+          POSTGRES_PASSWORD: labpar
+          POSTGRES_DB: labpar_pruebas
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U labpar" --health-interval 5s --health-timeout 5s --health-retries 20
+    defaults:
+      run:
+        working-directory: labpar/backend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compiladores (gcc con OpenMP y Open MPI)
+        run: sudo apt-get update && sudo apt-get install -y openmpi-bin libopenmpi-dev
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt
+      - run: python -m pyflakes labpar tests
+      - name: Pruebas con SQLite
+        run: python -m pytest -q
+      - name: Pruebas con PostgreSQL
+        run: python -m pytest -q
+        env:
+          LABPAR_PRUEBAS_DATABASE_URL: postgresql+psycopg://labpar:labpar@localhost:5432/labpar_pruebas
+      - name: Banco de laboratorios (soluciones docentes y plantillas)
+        run: python -m labpar.banco verificar
+
+  frontend:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: labpar/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: labpar/frontend/package-lock.json
+      - run: npm ci
+      - run: npm run formato:verificar
+      - run: npm run build
+
+  imagenes:
+    runs-on: ubuntu-24.04
+    needs: [backend, frontend]
+    defaults:
+      run:
+        working-directory: labpar
+    steps:
+      - uses: actions/checkout@v4
+      - run: cp .env.ejemplo .env
+      - run: docker compose build

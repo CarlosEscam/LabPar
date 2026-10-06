@@ -1,0 +1,7 @@
+# Archivos de bloqueo y temporales de Office
+~$*
+*.tmp
+# Configuración local con secretos
+.env
+.DS_Store
+Thumbs.db

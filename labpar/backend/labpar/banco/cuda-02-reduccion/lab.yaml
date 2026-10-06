@@ -1,0 +1,65 @@
+slug: cuda-02-reduccion
+titulo: Reducción en memoria compartida
+modelo: cuda
+lenguaje: cuda
+nivel: intermedio
+orden: 22
+duracion_estimada_min: 75
+resumen: >-
+  Reemplaza millones de atomicAdd por una reducción en árbol con memoria compartida y un bucle
+  grid-stride. Compara la aceleración de la GPU frente a la CPU en un problema con mucho cómputo.
+conceptos: [memoria compartida, __syncthreads, reducción en árbol, atomicAdd, grid-stride]
+objetivos:
+  - nivel: Aplicar
+    texto: Implementar una reducción en árbol con memoria compartida y sincronización de bloque.
+  - nivel: Analizar
+    texto: Explicar el costo de las operaciones atómicas concurrentes sobre una misma dirección.
+  - nivel: Evaluar
+    texto: Comparar el rendimiento de distintas estrategias de reducción en la GPU.
+config:
+  tiempo_limite_s: 15
+  tiempo_limite_rendimiento_s: 40
+  repeticiones_rendimiento: 3
+  comparacion: exacta
+  peso_correccion: 60
+  peso_rendimiento: 40
+  aceleracion_objetivo: 10
+  entrada_rendimiento: "400000000 2026\n"
+  requisitos:
+    - patron: '__shared__'
+      mensaje: Usa memoria compartida (__shared__) para la reducción dentro del bloque.
+    - patron: '__syncthreads\s*\('
+      mensaje: Sincroniza los hilos del bloque con __syncthreads() entre los pasos de la reducción.
+  pistas_rendimiento:
+    - "Asegúrate de hacer un solo atomicAdd por bloque, no uno por elemento."
+casos:
+  - {nombre: Ejemplo del enunciado, archivo: 01-ejemplo, visible: true}
+  - {nombre: Sin elementos, archivo: 02-vacio, visible: true}
+  - {nombre: n = 257 (un bloque y un hilo), archivo: 03-bloque}
+  - {nombre: n primo (un millón), archivo: 04-millon}
+  - {nombre: Cien millones de términos, archivo: 05-grande, peso: 2}
+pistas:
+  - "Índice inicial: blockIdx.x * blockDim.x + threadIdx.x; paso: blockDim.x * gridDim.x."
+  - "El __syncthreads() debe ejecutarse en todos los hilos del bloque: no lo pongas dentro del if."
+  - Solo el hilo 0 de cada bloque llama a atomicAdd.
+preguntas:
+  - pregunta: ¿Por qué se necesita __syncthreads() entre los pasos de la reducción en árbol?
+    opciones:
+      - Para liberar la memoria compartida.
+      - Porque un hilo lee posiciones que otros hilos escribieron en el paso anterior; hay que esperar a que todos terminen.
+      - Para sincronizar la GPU con la CPU.
+      - No es necesario si el bloque tiene 256 hilos.
+    correcta: 1
+    explicacion: Sin la barrera, un hilo podría leer parcial[i + s] antes de que el hilo responsable lo actualice.
+  - pregunta: ¿Qué problema tiene que todos los hilos hagan atomicAdd directamente sobre el total?
+    opciones:
+      - El resultado es incorrecto.
+      - Millones de operaciones atómicas sobre la misma dirección se serializan y el kernel es muy lento.
+      - atomicAdd no existe para enteros de 64 bits.
+      - Ninguno.
+    correcta: 1
+    explicacion: Es correcto pero lento; la reducción en memoria compartida deja un solo atomicAdd por bloque.
+  - pregunta: En un bucle grid-stride, ¿qué paso usa cada hilo?
+    opciones: ["1", "blockDim.x", "blockDim.x × gridDim.x", "n / 256"]
+    correcta: 2
+    explicacion: El paso es el número total de hilos de la malla, así un número fijo de bloques cubre cualquier n.

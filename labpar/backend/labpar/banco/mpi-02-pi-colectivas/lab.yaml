@@ -1,0 +1,72 @@
+slug: mpi-02-pi-colectivas
+titulo: π con operaciones colectivas (MPI_Bcast y MPI_Reduce)
+modelo: mpi
+lenguaje: c
+nivel: basico
+orden: 12
+duracion_estimada_min: 45
+resumen: >-
+  Calcula π repartiendo los subintervalos de forma cíclica entre procesos y combina los resultados con
+  MPI_Bcast y MPI_Reduce, las colectivas más usadas.
+conceptos: [MPI_Bcast, MPI_Reduce, reparto cíclico, operaciones colectivas]
+objetivos:
+  - nivel: Comprender
+    texto: Explicar la semántica de MPI_Bcast y MPI_Reduce y por qué todos los procesos deben llamarlas.
+  - nivel: Aplicar
+    texto: Implementar un reparto cíclico de iteraciones entre procesos.
+  - nivel: Analizar
+    texto: Comparar el costo de comunicación de una colectiva con el de una cadena de mensajes punto a punto.
+config:
+  hilos_correccion: [1, 3, 4]
+  repeticiones_correccion: 1
+  hilos_rendimiento: [1, 2, 4, 8]
+  repeticiones_rendimiento: 3
+  tiempo_limite_s: 8
+  tiempo_limite_rendimiento_s: 40
+  comparacion: numerica
+  tolerancia_rel: 1.0e-9
+  tolerancia_abs: 1.0e-12
+  peso_correccion: 70
+  peso_rendimiento: 30
+  eficiencia_objetivo: 0.6
+  entrada_rendimiento: "300000000\n"
+  requisitos:
+    - patron: '\bMPI_Bcast\s*\('
+      mensaje: Difunde n con MPI_Bcast.
+    - patron: '\bMPI_Reduce\s*\('
+      mensaje: Combina las sumas locales con MPI_Reduce.
+casos:
+  - {nombre: Ejemplo del enunciado, archivo: 01-ejemplo, visible: true}
+  - {nombre: n = 1 (menos índices que procesos), archivo: 02-uno, visible: true}
+  - {nombre: n = 7, archivo: 03-siete}
+  - {nombre: Mil subintervalos, archivo: 04-mil}
+  - {nombre: Cinco millones de subintervalos, archivo: 05-grande, peso: 2}
+pistas:
+  - "MPI_Bcast(&n, 1, MPI_LONG_LONG, 0, MPI_COMM_WORLD) debe ejecutarse en todos los procesos, no solo en el 0."
+  - "Bucle cíclico: for (long long i = rango; i < n; i += p)."
+  - "MPI_Reduce(&local, &total, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD)."
+preguntas:
+  - pregunta: ¿Qué hace MPI_Reduce(&local, &total, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD)?
+    opciones:
+      - Envía local del proceso 0 a todos los procesos.
+      - Suma los valores local de todos los procesos y deja el resultado en total del proceso 0.
+      - Suma los valores local y deja el resultado en todos los procesos.
+      - Reduce el número de procesos a uno.
+    correcta: 1
+    explicacion: El resultado solo es válido en la raíz (proceso 0); para tenerlo en todos se usa MPI_Allreduce.
+  - pregunta: Si solo el proceso 0 llama a MPI_Bcast, ¿qué ocurre?
+    opciones:
+      - Funciona igual, porque el proceso 0 es la raíz.
+      - Los demás procesos nunca reciben n y el programa puede bloquearse o calcular con valores incorrectos.
+      - MPI_Bcast detecta el error y llama a MPI_Abort.
+      - Solo cambia el rendimiento.
+    correcta: 1
+    explicacion: Las colectivas deben ser llamadas por todos los procesos del comunicador, en el mismo orden.
+  - pregunta: ¿Cuál es la diferencia entre MPI_Reduce y MPI_Allreduce?
+    opciones:
+      - MPI_Allreduce deja el resultado en todos los procesos.
+      - MPI_Allreduce solo admite sumas.
+      - MPI_Reduce es asíncrona.
+      - No hay diferencia.
+    correcta: 0
+    explicacion: MPI_Allreduce equivale a MPI_Reduce seguido de MPI_Bcast, aunque las bibliotecas lo implementan de forma más eficiente.

@@ -1,0 +1,44 @@
+# Trabajador del motor de evaluación: compila y ejecuta el código de los estudiantes en un entorno aislado.
+#
+#   CPU (OpenMP y MPI):  docker build -f Dockerfile.trabajador -t labpar-trabajador .
+#   GPU (además, CUDA):  docker build -f Dockerfile.trabajador --build-arg BASE=nvidia/cuda:12.6.3-devel-ubuntu24.04 \
+#                        -t labpar-trabajador-gpu .
+ARG BASE=ubuntu:24.04
+FROM ${BASE}
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# gcc con libgomp (OpenMP), Open MPI y las utilidades para aislar la red del usuario de los programas.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        python3 python3-venv gcc g++ make libc6-dev openmpi-bin libopenmpi-dev iptables ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m venv /opt/venv
+ENV PATH=/opt/venv/bin:$PATH
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY labpar ./labpar
+COPY docker/entrada-trabajador.sh /usr/local/bin/entrada-trabajador
+
+# Usuario sin privilegios que ejecuta los programas de los estudiantes (uid y gid 2000).
+# sed quita finales de línea CRLF por si el repositorio se clonó en Windows.
+RUN sed -i 's/\r$//' /usr/local/bin/entrada-trabajador && chmod 755 /usr/local/bin/entrada-trabajador \
+    && groupadd --gid 2000 alumno \
+    && useradd --uid 2000 --gid 2000 --no-create-home --home-dir /nonexistent --shell /usr/sbin/nologin alumno \
+    && mkdir -p /datos && chmod 755 /datos
+
+# El proceso trabajador corre como root solo para cambiar de usuario en cada ejecución; el código de los
+# estudiantes siempre se ejecuta como «alumno», con límites de CPU, memoria, procesos y archivos.
+ENV LABPAR_DATOS=/datos \
+    LABPAR_UID_SANDBOX=2000 \
+    LABPAR_GID_SANDBOX=2000
+
+ENTRYPOINT ["entrada-trabajador"]
+CMD ["python", "-m", "labpar.worker"]

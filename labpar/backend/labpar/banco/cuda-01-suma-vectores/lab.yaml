@@ -1,0 +1,68 @@
+slug: cuda-01-suma-vectores
+titulo: Suma de vectores en la GPU
+modelo: cuda
+lenguaje: cuda
+nivel: basico
+orden: 21
+duracion_estimada_min: 45
+resumen: >-
+  Primer kernel de CUDA: índice global, verificación de límites, configuración de la malla y
+  transferencias entre host y dispositivo. Observa por qué la GPU no siempre es más rápida.
+conceptos: [kernel, malla y bloques, cudaMalloc, cudaMemcpy, transferencias PCIe]
+objetivos:
+  - nivel: Comprender
+    texto: Describir la jerarquía de hilos de CUDA (malla, bloques, hilos) y el índice global de un hilo.
+  - nivel: Aplicar
+    texto: Reservar memoria en la GPU, transferir datos y lanzar un kernel con la configuración adecuada.
+  - nivel: Evaluar
+    texto: Juzgar cuándo conviene usar la GPU según la relación entre cómputo y transferencia de datos.
+config:
+  tiempo_limite_s: 15
+  tiempo_limite_rendimiento_s: 40
+  repeticiones_rendimiento: 3
+  memoria_mb: 1024
+  comparacion: numerica
+  tolerancia_rel: 1.0e-12
+  tolerancia_abs: 1.0e-6
+  peso_correccion: 100
+  peso_rendimiento: 0
+  aceleracion_objetivo: 1.0
+  entrada_rendimiento: "20000000\n"
+  requisitos:
+    - patron: '__global__'
+      mensaje: Define un kernel con __global__.
+    - patron: '<<<'
+      mensaje: Lanza el kernel con la sintaxis <<<bloques, hilos>>>.
+    - patron: '\bcudaMemcpy\s*\('
+      mensaje: Transfiere los datos con cudaMemcpy.
+casos:
+  - {nombre: Ejemplo del enunciado, archivo: 01-ejemplo, visible: true}
+  - {nombre: Un elemento, archivo: 02-uno, visible: true}
+  - {nombre: n = 4097 (bloque incompleto), archivo: 03-bloque-incompleto}
+  - {nombre: n = 1000, archivo: 04-mil}
+  - {nombre: Un millón y tres elementos, archivo: 05-grande, peso: 2}
+pistas:
+  - "Número de bloques: (n + 255) / 256 (división entera redondeando hacia arriba)."
+  - "cudaMemcpy(d_a, a, bytes, cudaMemcpyHostToDevice) copia del host a la GPU; para traer c usa cudaMemcpyDeviceToHost."
+  - Sin la verificación i < n, los hilos sobrantes del último bloque escriben fuera del arreglo.
+preguntas:
+  - pregunta: Con n = 1 000 000 y bloques de 256 hilos, ¿cuántos bloques se necesitan?
+    opciones: ["3906", "3907", "1 000 000", "256"]
+    correcta: 1
+    explicacion: ⌈1 000 000 / 256⌉ = 3907. El último bloque tiene hilos de más.
+  - pregunta: ¿Por qué el kernel necesita la condición if (i < n)?
+    opciones:
+      - Porque CUDA no permite índices mayores que 1024.
+      - Porque el último bloque puede tener hilos cuyo índice global supera n.
+      - Para que el kernel sea más rápido.
+      - No es necesaria si n es par.
+    correcta: 1
+    explicacion: El número total de hilos (bloques × 256) suele ser mayor que n; esos hilos no deben acceder a memoria.
+  - pregunta: ¿Por qué la suma de vectores en GPU puede tardar más que en la CPU?
+    opciones:
+      - Porque la GPU tiene menos núcleos que la CPU.
+      - Porque copiar los datos por PCIe cuesta más que hacer una suma por elemento.
+      - Porque los double no existen en la GPU.
+      - Porque el kernel se ejecuta de forma secuencial.
+    correcta: 1
+    explicacion: La operación tiene muy poca aritmética por dato transferido; el tiempo lo dominan las transferencias.

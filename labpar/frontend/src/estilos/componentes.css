@@ -1,0 +1,751 @@
+/* LabPar — componentes reutilizables. */
+
+/* ----------------------------------------------------------------------------- Botones */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radio-control);
+  background: var(--hoja);
+  color: var(--tinta);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease;
+}
+
+.boton:hover {
+  background: var(--hoja-2);
+  border-color: var(--grafito);
+}
+
+.boton:disabled,
+.boton[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.boton svg {
+  flex: none;
+}
+
+.boton-primario {
+  background: var(--accion);
+  border-color: var(--accion);
+  color: var(--accion-texto);
+}
+
+.boton-primario:hover {
+  background: var(--accion-hover);
+  border-color: var(--accion-hover);
+}
+
+.boton-sutil {
+  background: transparent;
+  border-color: transparent;
+  color: var(--grafito);
+}
+
+.boton-sutil:hover {
+  background: var(--hoja-2);
+  border-color: transparent;
+  color: var(--tinta);
+}
+
+.boton-peligro {
+  color: var(--error-texto);
+  border-color: color-mix(in srgb, var(--error) 50%, var(--linea));
+}
+
+.boton-peligro:hover {
+  background: var(--error-suave);
+  border-color: var(--error);
+}
+
+.boton-chico {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 0.875rem;
+  gap: 6px;
+}
+
+.boton-icono {
+  min-height: 36px;
+  width: 36px;
+  padding: 0;
+}
+
+.boton-enlace {
+  padding: 0;
+  min-height: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+.boton-enlace:hover {
+  text-decoration-color: currentColor;
+}
+
+/* ----------------------------------------------------------------------------- Formularios */
+.campo {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.campo > label,
+.campo > .etiqueta,
+legend.etiqueta {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.campo .ayuda {
+  font-size: 0.875rem;
+  color: var(--grafito);
+}
+
+.entrada,
+.campo input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.campo select,
+.campo textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radio-control);
+  background: var(--hoja);
+  color: var(--tinta);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.campo textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.campo textarea.mono,
+.entrada.mono {
+  font-family: var(--fuente-codigo);
+  font-size: 0.9rem;
+}
+
+.entrada:focus,
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: 2px solid var(--foco);
+  outline-offset: 0;
+  border-color: var(--foco);
+}
+
+.campo [aria-invalid="true"] {
+  border-color: var(--error);
+}
+
+.casilla {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.casilla input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--accion);
+}
+
+.formulario {
+  display: grid;
+  gap: 18px;
+}
+
+.formulario .acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.campos-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .campos-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Control segmentado (p. ej., número de hilos) */
+.segmentado {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 8px;
+  background: var(--hoja-2);
+}
+
+.segmentado button {
+  min-width: 34px;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--grafito);
+  font-weight: 650;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.segmentado button[aria-pressed="true"] {
+  background: var(--hoja);
+  color: var(--tinta);
+  box-shadow: 0 0 0 1px var(--linea-fuerte);
+}
+
+.segmentado button:hover:not([aria-pressed="true"]) {
+  color: var(--tinta);
+}
+
+/* ----------------------------------------------------------------------------- Etiquetas */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+  background: var(--hoja-3);
+  color: var(--grafito);
+}
+
+.chip-borde {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--linea-fuerte);
+}
+
+.chip-openmp {
+  background: var(--omp-suave);
+  color: var(--omp-texto);
+}
+
+.chip-mpi {
+  background: var(--mpi-suave);
+  color: var(--mpi-texto);
+}
+
+.chip-cuda {
+  background: var(--cuda-suave);
+  color: var(--cuda-texto);
+}
+
+.chip-ok {
+  background: var(--ok-suave);
+  color: var(--ok-texto);
+}
+
+.chip-aviso {
+  background: var(--aviso-suave);
+  color: var(--aviso-texto);
+}
+
+.chip-error {
+  background: var(--error-suave);
+  color: var(--error-texto);
+}
+
+/* Veredicto: ícono + texto, nunca solo color */
+.veredicto {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.veredicto-ok {
+  color: var(--ok-texto);
+}
+
+.veredicto-error {
+  color: var(--error-texto);
+}
+
+.veredicto-aviso {
+  color: var(--aviso-texto);
+}
+
+.veredicto-neutro,
+.veredicto-proceso {
+  color: var(--grafito);
+}
+
+.veredicto-grande {
+  font-size: 1.3125rem;
+  gap: 10px;
+}
+
+/* ----------------------------------------------------------------------------- Paneles y avisos */
+.panel {
+  background: var(--hoja);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-panel);
+  padding: 24px;
+}
+
+.panel-compacto {
+  padding: 16px 18px;
+}
+
+.aviso {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 16px;
+  border-radius: var(--radio-control);
+  border: 1px solid var(--linea);
+  background: var(--hoja);
+  font-size: 0.9375rem;
+}
+
+.aviso > svg {
+  margin-top: 2px;
+}
+
+.aviso-error {
+  border-color: color-mix(in srgb, var(--error) 35%, transparent);
+  background: var(--error-suave);
+  color: var(--error-texto);
+}
+
+.aviso-ok {
+  border-color: color-mix(in srgb, var(--ok) 35%, transparent);
+  background: var(--ok-suave);
+  color: var(--ok-texto);
+}
+
+.aviso-aviso {
+  border-color: color-mix(in srgb, var(--aviso) 40%, transparent);
+  background: var(--aviso-suave);
+  color: var(--aviso-texto);
+}
+
+.aviso strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.vacio {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding: 36px 32px;
+  border: 1px dashed var(--linea-fuerte);
+  border-radius: var(--radio-panel);
+  color: var(--grafito);
+}
+
+.vacio h3 {
+  font-size: 1.125rem;
+}
+
+/* ----------------------------------------------------------------------------- Tablas */
+.tabla-marco {
+  overflow-x: auto;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-panel);
+  background: var(--hoja);
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.tabla th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  color: var(--grafito);
+  background: var(--hoja-2);
+  border-bottom: 1px solid var(--linea);
+  white-space: nowrap;
+}
+
+.tabla td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--linea);
+  vertical-align: middle;
+}
+
+.tabla tr:last-child td {
+  border-bottom: 0;
+}
+
+.tabla .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tabla tbody tr.clic {
+  cursor: pointer;
+}
+
+.tabla tbody tr.clic:hover td {
+  background: var(--hoja-2);
+}
+
+.tabla a.titulo-fila {
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.tabla a.titulo-fila:hover {
+  text-decoration: underline;
+}
+
+/* ----------------------------------------------------------------------------- Pestañas */
+.pestanas {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--linea);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pestanas::-webkit-scrollbar {
+  display: none;
+}
+
+.pestanas [role="tab"],
+.pestanas a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 12px;
+  border: 0;
+  background: none;
+  color: var(--grafito);
+  font-weight: 650;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pestanas [role="tab"]:hover,
+.pestanas a:hover {
+  color: var(--tinta);
+}
+
+.pestanas [aria-selected="true"],
+.pestanas a[aria-current="page"] {
+  color: var(--tinta);
+}
+
+.pestanas [aria-selected="true"]::after,
+.pestanas a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--tinta);
+}
+
+.contador {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--hoja-3);
+  color: var(--grafito);
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------------------------------------------- Diálogo y menú */
+dialog.dialogo {
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  padding: 0;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-dialogo);
+  background: var(--hoja);
+  color: var(--tinta);
+  box-shadow: 0 24px 60px rgba(10, 20, 24, 0.25);
+}
+
+dialog.dialogo-ancho {
+  width: min(880px, calc(100vw - 32px));
+}
+
+dialog.dialogo::backdrop {
+  background: var(--velo);
+}
+
+.dialogo-cuerpo {
+  display: grid;
+  gap: 18px;
+  padding: 24px 24px 20px;
+}
+
+.dialogo-cabeza {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dialogo-pie {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 24px;
+  border-top: 1px solid var(--linea);
+  background: var(--hoja-2);
+  border-radius: 0 0 var(--radio-dialogo) var(--radio-dialogo);
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 40;
+  min-width: 240px;
+  padding: 6px;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-panel);
+  background: var(--hoja);
+  box-shadow: 0 14px 36px rgba(10, 20, 24, 0.16);
+}
+
+.menu-cabeza {
+  padding: 10px 12px 12px;
+  border-bottom: 1px solid var(--linea);
+  margin-bottom: 6px;
+}
+
+.menu a,
+.menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  font-size: 0.9375rem;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu a:hover,
+.menu button:hover {
+  background: var(--hoja-2);
+}
+
+/* ----------------------------------------------------------------------------- Notificaciones */
+.notificaciones {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  display: grid;
+  gap: 10px;
+  width: min(380px, calc(100vw - 40px));
+}
+
+.notificacion {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 14px 14px 16px;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-panel);
+  background: var(--hoja);
+  box-shadow: 0 14px 36px rgba(10, 20, 24, 0.16);
+  font-size: 0.9375rem;
+  animation: aparecer 180ms ease-out;
+}
+
+.notificacion button {
+  border: 0;
+  background: none;
+  color: var(--grafito);
+  cursor: pointer;
+  padding: 2px;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* ----------------------------------------------------------------------------- Carga */
+.cargando {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 0;
+  color: var(--grafito);
+}
+
+.giro {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--linea-fuerte);
+  border-top-color: var(--tinta);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Indicador de trabajo en paralelo: tres carriles que se bifurcan y se unen (como la marca). */
+.carriles path.carril {
+  stroke-dasharray: 5 7;
+  animation: avanzar 0.9s linear infinite;
+}
+
+.carriles path.carril:nth-of-type(2) {
+  animation-duration: 1.15s;
+}
+
+.carriles path.carril:nth-of-type(3) {
+  animation-duration: 0.75s;
+}
+
+@keyframes avanzar {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+/* ----------------------------------------------------------------------------- Barra de progreso */
+.barra-progreso {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--hoja-3);
+  overflow: hidden;
+}
+
+.barra-progreso > span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 999px;
+  background: var(--ok);
+}
+
+/* ----------------------------------------------------------------------------- Detalles */
+details.plegable {
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-control);
+  background: var(--hoja);
+}
+
+details.plegable > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  font-weight: 650;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+details.plegable > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.plegable > summary::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--grafito);
+  border-bottom: 2px solid var(--grafito);
+  transform: rotate(-45deg);
+  transition: transform 120ms ease;
+  margin-right: 4px;
+}
+
+details.plegable[open] > summary::before {
+  transform: rotate(45deg);
+}
+
+details.plegable > .contenido {
+  padding: 0 14px 14px;
+}
+
+pre.consola {
+  margin: 0;
+  padding: 12px 14px;
+  max-height: 320px;
+  overflow: auto;
+  border-radius: var(--radio-control);
+  background: var(--hoja-2);
+  border: 1px solid var(--linea);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  tab-size: 4;
+}
+
+pre.consola.vacia {
+  color: var(--tenue);
+  font-style: italic;
+}

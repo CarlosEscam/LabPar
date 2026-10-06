@@ -1,0 +1,77 @@
+slug: omp-04-multiplicacion-matrices
+titulo: Multiplicación de matrices
+modelo: openmp
+lenguaje: c
+nivel: intermedio
+orden: 4
+duracion_estimada_min: 60
+resumen: >-
+  Paraleliza C = A × B repartiendo filas entre hilos. Practica el alcance de variables en bucles
+  anidados, las reducciones de varias variables y el efecto de la jerarquía de memoria.
+conceptos: [bucles anidados, private, reduction, localidad de caché]
+objetivos:
+  - nivel: Aplicar
+    texto: Paralelizar bucles anidados declarando correctamente las variables privadas.
+  - nivel: Analizar
+    texto: Relacionar el orden de recorrido de la memoria con el tiempo de ejecución.
+  - nivel: Evaluar
+    texto: Decidir qué bucle conviene paralelizar según la granularidad y la sobrecarga.
+config:
+  hilos_correccion: [1, 4]
+  repeticiones_correccion: 2
+  hilos_rendimiento: [1, 2, 4, 8]
+  repeticiones_rendimiento: 3
+  tiempo_limite_s: 10
+  comparacion: numerica
+  tolerancia_rel: 1.0e-9
+  tolerancia_abs: 1.0e-6
+  memoria_mb: 768
+  peso_correccion: 70
+  peso_rendimiento: 30
+  eficiencia_objetivo: 0.65
+  entrada_rendimiento: "1000\n"
+  requisitos:
+    - patron: '#\s*pragma\s+omp\s+parallel'
+      mensaje: Usa al menos una región paralela de OpenMP (#pragma omp parallel …).
+casos:
+  - {nombre: Ejemplo n = 2, archivo: 01-dos, visible: true}
+  - {nombre: n = 1, archivo: 02-uno, visible: true}
+  - {nombre: n = 3, archivo: 03-tres}
+  - {nombre: n = 50, archivo: 04-cincuenta}
+  - {nombre: n = 257 (impar), archivo: 05-impar}
+  - {nombre: n = 600, archivo: 06-grande, peso: 2}
+pistas:
+  - Paraleliza el bucle de i con `#pragma omp parallel for private(j, k)`, o declara j y k dentro de los for.
+  - Para los valores de control usa `reduction(+:suma, ponderada, traza)`.
+  - Paralelizar el bucle más interno crea y sincroniza el equipo de hilos n² veces.
+preguntas:
+  - pregunta: Al paralelizar el bucle de i, ¿qué variables deben ser privadas si i, j y k se declararon fuera?
+    opciones:
+      - Solo i.
+      - j y k; i es privada automáticamente por ser la variable del bucle paralelizado.
+      - Ninguna; los índices nunca se comparten.
+      - Todas, incluidas A, B y C.
+    correcta: 1
+    explicacion: >-
+      La variable del bucle asociado a «omp for» se privatiza automáticamente; las de los bucles internos,
+      si se declararon fuera, son compartidas y los hilos se pisarían los índices.
+  - pregunta: ¿Por qué el orden i-k-j es más rápido que i-j-k en C?
+    opciones:
+      - Porque hace menos operaciones.
+      - Porque recorre B y C por filas, con accesos contiguos que aprovechan la caché.
+      - Porque el compilador solo optimiza i-k-j.
+      - No hay diferencia de rendimiento.
+    correcta: 1
+    explicacion: >-
+      En C las matrices se guardan por filas. En i-j-k el bucle interno recorre B por columnas, saltando n
+      posiciones en cada acceso, lo que desaprovecha cada línea de caché.
+  - pregunta: Si paralelizas el bucle de j (el más interno) en lugar del de i, ¿qué ocurre?
+    opciones:
+      - El programa es incorrecto.
+      - La región paralela se crea y sincroniza n² veces y la sobrecarga supera la ganancia.
+      - Se obtiene la máxima aceleración posible.
+      - OpenMP lo convierte automáticamente en el bucle externo.
+    correcta: 1
+    explicacion: >-
+      Cada ejecución del bucle interno tiene poco trabajo (n operaciones); repartirlo implica una barrera
+      implícita por cada par (i, k). La granularidad es demasiado fina.

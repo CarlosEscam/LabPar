@@ -1,0 +1,108 @@
+# LabPar: despliegue sobre los recursos locales de la Universidad.
+#
+#   1. cp .env.ejemplo .env   (y cambie las contraseñas y secretos)
+#   2. docker compose up -d --build
+#   3. Abra http://localhost:8080  (o el puerto de LABPAR_PUERTO)
+#
+# Más trabajadores en el mismo nodo:   docker compose up -d --scale trabajador=2
+# Nodo con GPU NVIDIA (CUDA):          docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
+name: labpar
+
+x-base-datos: &base-datos
+  LABPAR_DATABASE_URL: postgresql+psycopg://labpar:${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD en .env}@db:5432/labpar
+  LABPAR_JWT_SECRETO: ${LABPAR_JWT_SECRETO:?Defina LABPAR_JWT_SECRETO en .env}
+  LABPAR_SEUDONIMO_SECRETO: ${LABPAR_SEUDONIMO_SECRETO:?Defina LABPAR_SEUDONIMO_SECRETO en .env}
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: labpar
+      POSTGRES_USER: labpar
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD en .env}
+      # Exige contraseña también en conexiones locales.
+      POSTGRES_INITDB_ARGS: "--auth-local=scram-sha-256 --auth-host=scram-sha-256"
+    volumes:
+      - datos-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U labpar -d labpar"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks: [interna]
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      <<: *base-datos
+      LABPAR_DEMO: ${LABPAR_DEMO:-false}
+      LABPAR_REGISTRO_ABIERTO: ${LABPAR_REGISTRO_ABIERTO:-true}
+      LABPAR_ADMIN_EMAIL: ${LABPAR_ADMIN_EMAIL:-admin@labpar.local}
+      LABPAR_ADMIN_CLAVE: ${LABPAR_ADMIN_CLAVE:-}
+      LABPAR_JWT_HORAS: ${LABPAR_JWT_HORAS:-12}
+      LABPAR_INSTITUCION: ${LABPAR_INSTITUCION:-Universidad de Pamplona}
+      LABPAR_CONTACTO_DATOS: ${LABPAR_CONTACTO_DATOS:-}
+      LABPAR_MAX_ENVIOS_SIMULTANEOS: ${LABPAR_MAX_ENVIOS_SIMULTANEOS:-3}
+      LABPAR_CORS: ${LABPAR_CORS:-http://localhost:8080}
+    volumes:
+      - datos-api:/datos
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [interna]
+
+  trabajador:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.trabajador
+    restart: unless-stopped
+    init: true
+    environment:
+      <<: *base-datos
+      LABPAR_TRABAJADORES: ${LABPAR_TRABAJADORES:-2}
+      LABPAR_SEMBRAR_AL_INICIAR: "false"
+      LABPAR_TIEMPO_MAXIMO_TRABAJO_S: ${LABPAR_TIEMPO_MAXIMO_TRABAJO_S:-600}
+    volumes:
+      - datos-trabajador:/datos
+    # Memoria compartida para MPI y límites del contenedor: acotan a los programas MPI y CUDA,
+    # que no pueden limitarse por espacio de direcciones.
+    shm_size: 1gb
+    mem_limit: ${LABPAR_MEMORIA_TRABAJADOR:-4g}
+    pids_limit: 4096
+    # NET_ADMIN permite bloquear la red al usuario que ejecuta los programas (ver docker/entrada-trabajador.sh).
+    cap_add: [NET_ADMIN]
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      db:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    networks: [interna]
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${LABPAR_PUERTO:-8080}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    networks: [interna, externa]
+
+networks:
+  # Red interna sin salida a Internet: base de datos, API y trabajadores.
+  interna:
+    internal: true
+  externa: {}
+
+volumes:
+  datos-db:
+  datos-api:
+  datos-trabajador:

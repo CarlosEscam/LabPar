@@ -1,0 +1,45 @@
+# Agrega un trabajador con GPU NVIDIA para los laboratorios de CUDA.
+# Requisitos del nodo: controlador NVIDIA y NVIDIA Container Toolkit instalados.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
+#
+# Los trabajadores de CPU dejan los envíos de CUDA para este trabajador mientras esté en línea.
+services:
+  trabajador-gpu:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.trabajador
+      args:
+        BASE: nvidia/cuda:12.6.3-devel-ubuntu24.04
+    restart: unless-stopped
+    init: true
+    environment:
+      LABPAR_DATABASE_URL: postgresql+psycopg://labpar:${POSTGRES_PASSWORD}@db:5432/labpar
+      LABPAR_JWT_SECRETO: ${LABPAR_JWT_SECRETO}
+      LABPAR_SEUDONIMO_SECRETO: ${LABPAR_SEUDONIMO_SECRETO}
+      LABPAR_TRABAJADORES: ${LABPAR_TRABAJADORES_GPU:-1}
+      LABPAR_SEMBRAR_AL_INICIAR: "false"
+    volumes:
+      - datos-trabajador-gpu:/datos
+    shm_size: 1gb
+    mem_limit: ${LABPAR_MEMORIA_TRABAJADOR:-4g}
+    pids_limit: 4096
+    cap_add: [NET_ADMIN]
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    depends_on:
+      db:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    networks: [interna]
+
+volumes:
+  datos-trabajador-gpu:

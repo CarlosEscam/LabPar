@@ -1,0 +1,6 @@
+# Documentos binarios: sin conversión de finales de línea ni diferencias de texto
+*.docx binary
+*.pdf binary
+*.png binary
+*.jpg binary
+*.zip binary
