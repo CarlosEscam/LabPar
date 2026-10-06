@@ -10,6 +10,6 @@
 | [implementacion-proyecto12.md](tecnica/implementacion-proyecto12.md) | Resumen de la implementación frente a los objetivos del Proyecto 12. |
 | [capturas/](tecnica/capturas/) | Capturas de pantalla de la plataforma. |
 
-## Documentos del curso (`curso/`)
+## Documentos del curso
 
-Lineamientos de entrega del documento final del proyecto (cursos 2026-2).
+`Protocolo de entrega del Documento final de  Proyecto_cursos 2026_2.docx`: lineamientos de entrega del documento final del proyecto (cursos 2026-2).
