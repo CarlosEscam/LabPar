@@ -1,0 +1,1053 @@
+TY  - JOUR
+AU  - Sutter, H.
+TI  - The free lunch is over: A fundamental turn toward concurrency in software
+T2  - Dr. Dobb’s J.
+PY  - 2005
+VL  - 30
+IS  - 3
+SP  - 202
+EP  - 210
+ER  - 
+
+TY  - JOUR
+AU  - Asanović, K.
+AU  - Bodik, R.
+AU  - Demmel, J.
+AU  - Keaveny, T.
+AU  - Keutzer, K.
+AU  - Kubiatowicz, J.
+AU  - Morgan, N.
+AU  - Patterson, D.
+AU  - Sen, K.
+AU  - Wawrzynek, J.
+AU  - Wessel, D.
+AU  - Yelick, K.
+TI  - A view of the parallel computing landscape
+T2  - Commun. ACM
+PY  - 2009
+VL  - 52
+IS  - 10
+SP  - 56
+EP  - 67
+DO  - 10.1145/1562764.1562783
+ER  - 
+
+TY  - JOUR
+AU  - Hennessy, J. L.
+AU  - Patterson, D. A.
+TI  - A new golden age for computer architecture
+T2  - Commun. ACM
+PY  - 2019
+VL  - 62
+IS  - 2
+SP  - 48
+EP  - 60
+DO  - 10.1145/3282307
+ER  - 
+
+TY  - RPRT
+AU  - Prasad, S. K.
+AU  - Estrada, T.
+AU  - Ghafoor, S.
+AU  - Gupta, A.
+AU  - Kant, K.
+AU  - Stunkel, C.
+AU  - Sussman, A.
+AU  - Vaidyanathan, R.
+AU  - Weems, C.
+AU  - Agrawal, K.
+AU  - Barnas, M.
+AU  - Brown, D. W.
+AU  - Bryant, R.
+AU  - Bunde, D. P.
+AU  - Busch, C.
+AU  - Deb, D.
+AU  - Freudenthal, E.
+AU  - Jaja, J.
+AU  - Parashar, M.
+AU  - Phillips, C.
+AU  - Robey, B.
+AU  - Rosenberg, A.
+AU  - Saule, E.
+AU  - Shen, C.
+TI  - NSF/IEEE-TCPP curriculum initiative on parallel and distributed computing—Core topics for undergraduates, Version 2.0-beta
+PY  - 2020
+UR  - https://tcpp.cs.gsu.edu/curriculum/
+ER  - 
+
+TY  - BOOK
+AU  - Kumar, A. N.
+AU  - Raj, R. K.
+AU  - Aly, S. G.
+AU  - Anderson, M. D.
+AU  - Becker, B. A.
+AU  - Blumenthal, R. L.
+AU  - Eaton, E.
+AU  - Epstein, S. L.
+AU  - Goldweber, M.
+AU  - Jalote, P.
+AU  - Lea, D.
+AU  - Oudshoorn, M.
+AU  - Pias, M.
+AU  - Reiser, S.
+AU  - Servin, C.
+TI  - Computer Science Curricula 2023
+PY  - 2024
+PB  - ACM, IEEE Computer Society y AAAI
+CY  - Nueva York, NY, EE. UU.
+DO  - 10.1145/3664191
+ER  - 
+
+TY  - RPRT
+AU  - Consejo Nacional de Política Económica y Social (CONPES)
+TI  - Política Nacional de Inteligencia Artificial
+PY  - 2025
+IS  - 4144
+CY  - Bogotá, Colombia
+DA  - 14 feb. 2025
+ER  - 
+
+TY  - JOUR
+AU  - Kolikant, Y. B.-D.
+TI  - Learning concurrency: Evolution of students’ understanding of synchronization
+T2  - Int. J. Hum.-Comput. Stud.
+PY  - 2004
+VL  - 60
+IS  - 2
+SP  - 243
+EP  - 268
+DO  - 10.1016/j.ijhcs.2003.10.005
+ER  - 
+
+TY  - JOUR
+AU  - Lewandowski, G.
+AU  - Bouvier, D. J.
+AU  - Chen, T.-Y.
+AU  - McCartney, R.
+AU  - Sanders, K.
+AU  - Simon, B.
+AU  - VanDeGrift, T.
+TI  - Commonsense understanding of concurrency: Computing students and concert tickets
+T2  - Commun. ACM
+PY  - 2010
+VL  - 53
+IS  - 7
+SP  - 60
+EP  - 70
+DO  - 10.1145/1785414.1785438
+ER  - 
+
+TY  - CONF
+AU  - Hochstein, L.
+AU  - Carver, J.
+AU  - Shull, F.
+AU  - Asgari, S.
+AU  - Basili, V.
+AU  - Hollingsworth, J. K.
+AU  - Zelkowitz, M. V.
+TI  - Parallel programmer productivity: A case study of novice parallel programmers
+T2  - Proc. ACM/IEEE Conf. Supercomputing (SC’05)
+PY  - 2005
+CY  - Seattle, WA, EE. UU.
+DO  - 10.1109/SC.2005.53
+ER  - 
+
+TY  - CONF
+AU  - Nichols, D.
+AU  - Davis, J. H.
+AU  - Xie, Z.
+AU  - Rajaram, A.
+AU  - Bhatele, A.
+TI  - Can large language models write parallel code?
+T2  - Proc. 33rd Int. Symp. High-Performance Parallel and Distributed Computing (HPDC ’24)
+PY  - 2024
+CY  - Pisa, Italia
+DO  - 10.1145/3625549.3658689
+ER  - 
+
+TY  - CONF
+AU  - Dakkak, A.
+AU  - Pearson, C.
+AU  - Hwu, W.-M.
+TI  - WebGPU: A scalable online development platform for GPU programming courses
+T2  - Proc. IEEE Int. Parallel and Distributed Processing Symp. Workshops (IPDPSW)
+PY  - 2016
+SP  - 942
+EP  - 949
+CY  - Chicago, IL, EE. UU.
+DO  - 10.1109/IPDPSW.2016.63
+ER  - 
+
+TY  - JOUR
+AU  - Ngo, L. B.
+AU  - Srinath, A. T.
+AU  - Denton, J.
+AU  - Ziolkowski, M.
+TI  - Unifying computing resources and access interface to support parallel and distributed computing education
+T2  - J. Parallel Distrib. Comput.
+PY  - 2018
+VL  - 118
+SP  - 201
+EP  - 212
+DO  - 10.1016/j.jpdc.2018.02.020
+ER  - 
+
+TY  - JOUR
+AU  - Paiva, J. C.
+AU  - Leal, J. P.
+AU  - Figueira, Á.
+TI  - Automated assessment in computer science education: A state-of-the-art review
+T2  - ACM Trans. Comput. Educ.
+PY  - 2022
+VL  - 22
+IS  - 3
+SP  - 1
+EP  - 40
+DO  - 10.1145/3513140
+ER  - 
+
+TY  - JOUR
+AU  - Keuning, H.
+AU  - Jeuring, J.
+AU  - Heeren, B.
+TI  - A systematic literature review of automated feedback generation for programming exercises
+T2  - ACM Trans. Comput. Educ.
+PY  - 2018
+VL  - 19
+IS  - 1
+SP  - 3
+DO  - 10.1145/3231711
+ER  - 
+
+TY  - RPRT
+AU  - Departamento Administrativo Nacional de Estadística (DANE)
+TI  - Indicadores básicos de tenencia y uso de tecnologías de la información y las comunicaciones – TIC en hogares y personas de 5 y más años de edad, 2023
+PY  - 2024
+CY  - Bogotá, Colombia
+UR  - https://www.dane.gov.co/files/operaciones/TICH/bol-TICH-2023.pdf
+DA  - ago. 2024
+ER  - 
+
+TY  - JOUR
+AU  - Bohórquez-Chacón, L. F.
+AU  - Amaya-Torrado, Y. K.
+TI  - Diseño de un modelo pedagógico para la enseñanza de Fundamentos de Programación de Computadores basado en el uso de la tecnología como mediación pedagógica
+T2  - Respuestas
+PY  - 2005
+VL  - 10
+IS  - 1
+SP  - 30
+EP  - 37
+UR  - https://dialnet.unirioja.es/descarga/articulo/5555266.pdf
+ER  - 
+
+TY  - BOOK
+AU  - Hernández-Sampieri, R.
+AU  - Mendoza-Torres, C. P.
+TI  - Metodología de la investigación: las rutas cuantitativa, cualitativa y mixta
+PY  - 2018
+PB  - McGraw-Hill Interamericana
+CY  - Ciudad de México, México
+ER  - 
+
+TY  - RPRT
+AU  - Kitchenham, B.
+AU  - Charters, S.
+TI  - Guidelines for performing systematic literature reviews in software engineering
+PY  - 2007
+IS  - EBSE-2007-01
+CY  - Reino Unido
+ER  - 
+
+TY  - JOUR
+AU  - Page, M. J.
+AU  - McKenzie, J. E.
+AU  - Bossuyt, P. M.
+AU  - Boutron, I.
+AU  - Hoffmann, T. C.
+AU  - Mulrow, C. D.
+AU  - Shamseer, L.
+TI  - The PRISMA 2020 statement: An updated guideline for reporting systematic reviews
+T2  - BMJ
+PY  - 2021
+VL  - 372
+SP  - n71
+DO  - 10.1136/bmj.n71
+ER  - 
+
+TY  - STAND
+AU  - International Organization for Standardization
+TI  - Systems and software engineering—Systems and software Quality Requirements and Evaluation (SQuaRE)—Product quality model
+PY  - 2023
+IS  - ISO/IEC 25010:2023
+CY  - Ginebra, Suiza
+ER  - 
+
+TY  - JOUR
+AU  - Saaty, T. L.
+TI  - Decision making with the analytic hierarchy process
+T2  - Int. J. Serv. Sci.
+PY  - 2008
+VL  - 1
+IS  - 1
+SP  - 83
+EP  - 98
+DO  - 10.1504/IJSSCI.2008.017590
+ER  - 
+
+TY  - BOOK
+AU  - Branch, R. M.
+TI  - Instructional Design: The ADDIE Approach
+PY  - 2009
+PB  - Springer
+CY  - Nueva York, NY, EE. UU.
+DO  - 10.1007/978-0-387-09506-6
+ER  - 
+
+TY  - ELEC
+AU  - Schwaber, K.
+AU  - Sutherland, J.
+TI  - The Scrum Guide: The definitive guide to Scrum: The rules of the game
+PY  - 2020
+UR  - https://scrumguides.org/
+DA  - nov. 2020
+ER  - 
+
+TY  - BOOK
+AU  - Shadish, W. R.
+AU  - Cook, T. D.
+AU  - Campbell, D. T.
+TI  - Experimental and Quasi-Experimental Designs for Generalized Causal Inference
+PY  - 2002
+PB  - Houghton Mifflin
+CY  - Boston, MA, EE. UU.
+ER  - 
+
+TY  - CHAP
+AU  - Brooke, J.
+ED  - Jordan, P. W.
+ED  - Thomas, B.
+ED  - Weerdmeester, B. A.
+ED  - McClelland, I. L.
+TI  - SUS: A ‘quick and dirty’ usability scale
+T2  - Usability Evaluation in Industry
+PY  - 1996
+SP  - 189
+EP  - 194
+PB  - Taylor & Francis
+CY  - Londres, Reino Unido
+ER  - 
+
+TY  - LEGAL
+AU  - Congreso de la República de Colombia
+TI  - Ley Estatutaria 1581 de 2012, por la cual se dictan disposiciones generales para la protección de datos personales
+PY  - 2012
+CY  - Bogotá, Colombia
+DA  - 17 oct. 2012
+ER  - 
+
+TY  - JOUR
+AU  - Freeman, S.
+AU  - Eddy, S. L.
+AU  - McDonough, M.
+AU  - Smith, M. K.
+AU  - Okoroafor, N.
+AU  - Jordt, H.
+AU  - Wenderoth, M. P.
+TI  - Active learning increases student performance in science, engineering, and mathematics
+T2  - Proc. Natl. Acad. Sci. USA
+PY  - 2014
+VL  - 111
+IS  - 23
+SP  - 8410
+EP  - 8415
+DO  - 10.1073/pnas.1319030111
+ER  - 
+
+TY  - NEWS
+AU  - Gaviria González, N.
+TI  - De no tomar acciones, Colombia tendría déficit de 112.000 desarrolladores en 2025
+T2  - La República
+PY  - 2022
+UR  - https://www.larepublica.co/alta-gerencia/de-no-tomar-acciones-colombia-tendria-deficit-de-112-000-desarrolladores-en-2025-3440141
+DA  - 6 sep. 2022
+ER  - 
+
+TY  - ELEC
+TI  - Supercomputación, el camino hacia la independencia tecnológica
+T2  - Forosisis, no. 8, Departamento de Ingeniería de Sistemas y Computación, Universidad de los Andes
+PY  - 2017
+UR  - https://sistemas.uniandes.edu.co/images/forosisis/revista/8/pdf/ACFR3_Supercomputacion_el_camino_hacia_la_independencia_tecnologica.pdf
+DA  - 2017
+ER  - 
+
+TY  - JOUR
+AU  - Lawshe, C. H.
+TI  - A quantitative approach to content validity
+T2  - Pers. Psychol.
+PY  - 1975
+VL  - 28
+IS  - 4
+SP  - 563
+EP  - 575
+DO  - 10.1111/j.1744-6570.1975.tb01393.x
+ER  - 
+
+TY  - JOUR
+AU  - Cronbach, L. J.
+TI  - Coefficient alpha and the internal structure of tests
+T2  - Psychometrika
+PY  - 1951
+VL  - 16
+IS  - 3
+SP  - 297
+EP  - 334
+DO  - 10.1007/BF02310555
+ER  - 
+
+TY  - ELEC
+AU  - European Network for Accreditation of Engineering Education (ENAEE)
+TI  - EUR-ACE labelled programmes database: Systems Engineering (Ingeniería de Sistemas), University of Pamplona
+PY  - 2024
+UR  - https://eurace.enaee.eu/node/78785
+DA  - 2024
+ER  - 
+
+TY  - CONF
+AU  - Felter, W.
+AU  - Ferreira, A.
+AU  - Rajamony, R.
+AU  - Rubio, J.
+TI  - An updated performance comparison of virtual machines and Linux containers
+T2  - Proc. IEEE Int. Symp. Performance Analysis of Systems and Software (ISPASS)
+PY  - 2015
+SP  - 171
+EP  - 172
+CY  - Filadelfia, PA, EE. UU.
+DO  - 10.1109/ISPASS.2015.7095802
+ER  - 
+
+TY  - JOUR
+AU  - Kurtzer, G. M.
+AU  - Sochat, V.
+AU  - Bauer, M. W.
+TI  - Singularity: Scientific containers for mobility of compute
+T2  - PLoS ONE
+PY  - 2017
+VL  - 12
+IS  - 5
+SP  - e0177459
+DO  - 10.1371/journal.pone.0177459
+ER  - 
+
+TY  - CONF
+AU  - Adams, J. C.
+AU  - Caswell, J.
+AU  - Matthews, S. J.
+AU  - Peck, C.
+AU  - Shoop, E.
+AU  - Toth, D.
+AU  - Wolfer, J.
+TI  - The micro-cluster showcase: 7 inexpensive Beowulf clusters for teaching PDC
+T2  - Proc. 47th ACM Tech. Symp. Computing Science Education (SIGCSE ’16)
+PY  - 2016
+CY  - Memphis, TN, EE. UU.
+DO  - 10.1145/2839509.2844670
+ER  - 
+
+TY  - RPRT
+AU  - Asamblea General de las Naciones Unidas
+TI  - Transformar nuestro mundo: la Agenda 2030 para el Desarrollo Sostenible
+PY  - 2015
+IS  - A/RES/70/1
+CY  - Nueva York, NY, EE. UU.
+DA  - 25 sep. 2015
+ER  - 
+
+TY  - BOOK
+AU  - UNESCO
+TI  - Educación 2030: Declaración de Incheon y Marco de Acción para la realización del Objetivo de Desarrollo Sostenible 4
+PY  - 2016
+PB  - UNESCO
+CY  - París, Francia
+ER  - 
+
+TY  - CHAP
+AU  - Fresno, J.
+AU  - Ortega-Arranz, H.
+AU  - Ortega-Arranz, A.
+AU  - Gonzalez-Escribano, A.
+AU  - Llanos, D. R.
+ED  - Queirós, R.
+ED  - Pinto, M.
+TI  - Applying gamification in a parallel programming course
+T2  - Gamification-Based E-Learning Strategies for Computer Programming Education
+PY  - 2017
+SP  - 106
+EP  - 130
+PB  - IGI Global
+CY  - Hershey, PA, EE. UU.
+DO  - 10.4018/978-1-5225-1034-5.ch006
+ER  - 
+
+TY  - CONF
+AU  - Ayguadé, E.
+AU  - Alvarez, L.
+AU  - Banchelli, F.
+AU  - Burtscher, M.
+AU  - Gonzalez-Escribano, A.
+AU  - Gutierrez, J.
+AU  - Joiner, D.
+AU  - Kaeli, D.
+AU  - Previlon, F.
+AU  - Rodriguez-Gutiez, E.
+AU  - Bunde, D.
+TI  - Peachy parallel assignments (EduHPC 2018)
+T2  - Proc. IEEE/ACM Workshop on Education for High-Performance Computing (EduHPC)
+PY  - 2018
+SP  - 78
+EP  - 85
+CY  - Dallas, TX, EE. UU.
+ER  - 
+
+TY  - CONF
+AU  - Hidalgo-Céspedes, J.
+TI  - Evaluation of an online judge for concurrent programming learning
+T2  - Proc. XLIX Latin American Computer Conf. (CLEI)
+PY  - 2023
+SP  - 1
+EP  - 9
+CY  - La Paz, Bolivia
+DO  - 10.1109/CLEI60451.2023.10346201
+ER  - 
+
+TY  - JOUR
+AU  - García, L. G.
+AU  - Montoya, E.
+AU  - Isaza, S.
+AU  - Velásquez, R. A.
+TI  - An Open edX extension for parallel programming assignments with automatic configurable grading
+T2  - Int. J. Eng. Pedagogy
+PY  - 2021
+VL  - 11
+IS  - 4
+SP  - 7
+EP  - 22
+DO  - 10.3991/ijep.v11i4.20097
+ER  - 
+
+TY  - JOUR
+AU  - Hidalgo-Suárez, C. G.
+AU  - Bucheli-Guerrero, V. A.
+AU  - Restrepo-Calle, F.
+AU  - González-Osorio, F. A.
+TI  - Estrategia de enseñanza basada en la colaboración y la evaluación automática de código fuente en un curso de programación CS1
+T2  - Investigación e Innovación en Ingenierías
+PY  - 2021
+VL  - 9
+IS  - 1
+SP  - 50
+EP  - 60
+DO  - 10.17081/invinno.9.1.4185
+ER  - 
+
+TY  - JOUR
+AU  - Leytón-Yela, G. V.
+AU  - Bucheli-Guerrero, V. A.
+AU  - Ordóñez-Erazo, H. A.
+TI  - Herramientas usadas para la evaluación formativa automatizada en cursos de programación asistidos por computadora
+T2  - Revista Científica
+PY  - 2022
+VL  - 45
+IS  - 3
+SP  - 358
+EP  - 368
+DO  - 10.14483/23448350.19662
+ER  - 
+
+TY  - JOUR
+AU  - Pérez-Gutiérrez, B.
+TI  - Aplicando estilos de aprendizaje sobre objetos de aprendizaje: un caso de estudio en una universidad pública colombiana
+T2  - Respuestas
+PY  - 2014
+VL  - 19
+IS  - 2
+SP  - 59
+EP  - 69
+UR  - https://revistas.ufps.edu.co/index.php/respuestas/article/view/438
+ER  - 
+
+TY  - THES
+AU  - Suárez-Sierra, O. J.
+TI  - Diseño e implementación de aulas virtuales en entorno IG para control industrial en la Universidad de Pamplona
+PY  - 2011
+CY  - Bucaramanga, Colombia
+UR  - http://hdl.handle.net/20.500.11912/1671
+ER  - 
+
+TY  - CHAP
+AU  - Luo, Z.
+AU  - Wang, Z.
+AU  - Wu, D.
+AU  - Hei, X.
+AU  - Du, Y.
+TI  - Automatic generation and assessment of student assignments for parallel programming learning
+T2  - Parallel Architectures, Algorithms and Programming (PAAP 2019)
+PY  - 2020
+VL  - 1163
+SP  - 184
+EP  - 194
+PB  - Springer
+CY  - Singapur
+DO  - 10.1007/978-981-15-2767-8_18
+ER  - 
+
+TY  - JOUR
+AU  - Flynn, M. J.
+TI  - Some computer organizations and their effectiveness
+T2  - IEEE Trans. Comput.
+PY  - 1972
+VL  - C-21
+IS  - 9
+SP  - 948
+EP  - 960
+DO  - 10.1109/TC.1972.5009071
+ER  - 
+
+TY  - JOUR
+AU  - Nickolls, J.
+AU  - Buck, I.
+AU  - Garland, M.
+AU  - Skadron, K.
+TI  - Scalable parallel programming with CUDA
+T2  - ACM Queue
+PY  - 2008
+VL  - 6
+IS  - 2
+SP  - 40
+EP  - 53
+DO  - 10.1145/1365490.1365500
+ER  - 
+
+TY  - JOUR
+AU  - Dagum, L.
+AU  - Menon, R.
+TI  - OpenMP: An industry standard API for shared-memory programming
+T2  - IEEE Comput. Sci. Eng.
+PY  - 1998
+VL  - 5
+IS  - 1
+SP  - 46
+EP  - 55
+DO  - 10.1109/99.660313
+ER  - 
+
+TY  - ELEC
+AU  - OpenMP Architecture Review Board
+TI  - OpenMP application programming interface, Version 6.0
+PY  - 2024
+UR  - https://www.openmp.org/specifications/
+DA  - nov. 2024
+ER  - 
+
+TY  - ELEC
+AU  - Message Passing Interface Forum
+TI  - MPI: A message-passing interface standard, Version 5.0
+PY  - 2025
+UR  - https://www.mpi-forum.org/docs/
+DA  - jun. 2025
+ER  - 
+
+TY  - JOUR
+AU  - Gropp, W.
+AU  - Lusk, E.
+AU  - Doss, N.
+AU  - Skjellum, A.
+TI  - A high-performance, portable implementation of the MPI message passing interface standard
+T2  - Parallel Comput.
+PY  - 1996
+VL  - 22
+IS  - 6
+SP  - 789
+EP  - 828
+DO  - 10.1016/0167-8191(96)00024-5
+ER  - 
+
+TY  - ELEC
+AU  - NVIDIA Corporation
+TI  - CUDA C++ programming guide, Release 13.0
+PY  - 2025
+UR  - https://docs.nvidia.com/cuda/cuda-c-programming-guide/
+DA  - 2025
+ER  - 
+
+TY  - BOOK
+AU  - Hwu, W.-m. W.
+AU  - Kirk, D. B.
+AU  - El Hajj, I.
+TI  - Programming Massively Parallel Processors: A Hands-on Approach
+PY  - 2022
+PB  - Morgan Kaufmann
+CY  - Cambridge, MA, EE. UU.
+ER  - 
+
+TY  - CONF
+AU  - Amdahl, G. M.
+TI  - Validity of the single processor approach to achieving large scale computing capabilities
+T2  - Proc. AFIPS Spring Joint Computer Conf.
+PY  - 1967
+SP  - 483
+EP  - 485
+CY  - Atlantic City, NJ, EE. UU.
+DO  - 10.1145/1465482.1465560
+ER  - 
+
+TY  - JOUR
+AU  - Gustafson, J. L.
+TI  - Reevaluating Amdahl’s law
+T2  - Commun. ACM
+PY  - 1988
+VL  - 31
+IS  - 5
+SP  - 532
+EP  - 533
+DO  - 10.1145/42411.42415
+ER  - 
+
+TY  - JOUR
+AU  - Heradio, R.
+AU  - de la Torre, L.
+AU  - Galan, D.
+AU  - Cabrerizo, F. J.
+AU  - Herrera-Viedma, E.
+AU  - Dormido, S.
+TI  - Virtual and remote labs in education: A bibliometric analysis
+T2  - Comput. Educ.
+PY  - 2016
+VL  - 98
+SP  - 14
+EP  - 38
+DO  - 10.1016/j.compedu.2016.03.010
+ER  - 
+
+TY  - JOUR
+AU  - Potkonjak, V.
+AU  - Gardner, M.
+AU  - Callaghan, V.
+AU  - Mattila, P.
+AU  - Guetl, C.
+AU  - Petrović, V. M.
+AU  - Jovanović, K.
+TI  - Virtual laboratories for education in science, technology, and engineering: A review
+T2  - Comput. Educ.
+PY  - 2016
+VL  - 95
+SP  - 309
+EP  - 327
+DO  - 10.1016/j.compedu.2016.02.002
+ER  - 
+
+TY  - JOUR
+AU  - de Jong, T.
+AU  - Linn, M. C.
+AU  - Zacharia, Z. C.
+TI  - Physical and virtual laboratories in science and engineering education
+T2  - Science
+PY  - 2013
+VL  - 340
+IS  - 6130
+SP  - 305
+EP  - 308
+DO  - 10.1126/science.1230579
+ER  - 
+
+TY  - JOUR
+AU  - Merkel, D.
+TI  - Docker: Lightweight Linux containers for consistent development and deployment
+T2  - Linux J.
+PY  - 2014
+VL  - 2014
+IS  - 239
+SP  - 2
+ER  - 
+
+TY  - CHAP
+AU  - Yoo, A. B.
+AU  - Jette, M. A.
+AU  - Grondona, M.
+TI  - SLURM: Simple Linux utility for resource management
+T2  - Job Scheduling Strategies for Parallel Processing (JSSPP 2003)
+PY  - 2003
+VL  - 2862
+SP  - 44
+EP  - 60
+PB  - Springer
+CY  - Berlín, Alemania
+DO  - 10.1007/10968987_3
+ER  - 
+
+TY  - CHAP
+AU  - Kluyver, T.
+AU  - Ragan-Kelley, B.
+AU  - Pérez, F.
+AU  - Granger, B.
+AU  - Bussonnier, M.
+AU  - Frederic, J.
+AU  - Kelley, K.
+AU  - Hamrick, J.
+AU  - Grout, J.
+AU  - Corlay, S.
+AU  - Ivanov, P.
+AU  - Avila, D.
+AU  - Abdalla, S.
+AU  - Willing, C.
+ED  - Loizides, F.
+ED  - Schmidt, B.
+TI  - Jupyter Notebooks—A publishing format for reproducible computational workflows
+T2  - Positioning and Power in Academic Publishing: Players, Agents and Agendas
+PY  - 2016
+SP  - 87
+EP  - 90
+PB  - IOS Press
+CY  - Ámsterdam, Países Bajos
+DO  - 10.3233/978-1-61499-649-1-87
+ER  - 
+
+TY  - JOUR
+AU  - Wasik, S.
+AU  - Antczak, M.
+AU  - Badura, J.
+AU  - Laskowski, A.
+AU  - Sternal, T.
+TI  - A survey on online judge systems and their applications
+T2  - ACM Comput. Surv.
+PY  - 2018
+VL  - 51
+IS  - 1
+SP  - 3
+DO  - 10.1145/3143560
+ER  - 
+
+TY  - JOUR
+AU  - Špaček, F.
+AU  - Sohlich, R.
+AU  - Dulík, T.
+TI  - Docker as platform for assignments evaluation
+T2  - Procedia Eng.
+PY  - 2015
+VL  - 100
+SP  - 1665
+EP  - 1671
+DO  - 10.1016/j.proeng.2015.01.541
+ER  - 
+
+TY  - BOOK
+AU  - Kolb, D. A.
+TI  - Experiential Learning: Experience as the Source of Learning and Development
+PY  - 1984
+PB  - Prentice-Hall
+CY  - Englewood Cliffs, NJ, EE. UU.
+ER  - 
+
+TY  - BOOK
+AU  - Anderson, L. W.
+AU  - Krathwohl, D. R.
+TI  - A Taxonomy for Learning, Teaching, and Assessing: A Revision of Bloom’s Taxonomy of Educational Objectives
+PY  - 2001
+PB  - Longman
+CY  - Nueva York, NY, EE. UU.
+ER  - 
+
+TY  - JOUR
+AU  - Bangor, A.
+AU  - Kortum, P. T.
+AU  - Miller, J. T.
+TI  - An empirical evaluation of the System Usability Scale
+T2  - Int. J. Hum.-Comput. Interact.
+PY  - 2008
+VL  - 24
+IS  - 6
+SP  - 574
+EP  - 594
+DO  - 10.1080/10447310802205776
+ER  - 
+
+TY  - JOUR
+AU  - Davis, F. D.
+TI  - Perceived usefulness, perceived ease of use, and user acceptance of information technology
+T2  - MIS Quart.
+PY  - 1989
+VL  - 13
+IS  - 3
+SP  - 319
+EP  - 340
+DO  - 10.2307/249008
+ER  - 
+
+TY  - NEWS
+AU  - El Espectador
+TI  - Unipamplona renueva su acreditación en alta calidad por seis años más
+PY  - 2025
+UR  - https://www.elespectador.com/punto-de-encuentro/unipamplona-renueva-su-acreditacion-en-alta-calidad-por-seis-anos-mas/
+DA  - 11 ago. 2025
+ER  - 
+
+TY  - JOUR
+AU  - Barrios-Hernández, C. J.
+TI  - Editorial
+T2  - Revista UIS Ingenierías
+PY  - 2012
+VL  - 11
+IS  - 1
+UR  - https://revistas.uis.edu.co/index.php/revistauisingenierias/article/download/3190/3412
+ER  - 
+
+TY  - RPRT
+AU  - Consejo Nacional de Política Económica y Social (CONPES)
+TI  - Política Nacional para la Transformación Digital e Inteligencia Artificial
+PY  - 2019
+IS  - 3975
+CY  - Bogotá, Colombia
+DA  - 8 nov. 2019
+ER  - 
+
+TY  - LEGAL
+AU  - Asamblea Nacional Constituyente
+TI  - Constitución Política de Colombia
+PY  - 1991
+CY  - Bogotá, Colombia
+DA  - 1991
+ER  - 
+
+TY  - LEGAL
+AU  - Congreso de la República de Colombia
+TI  - Ley 30 de 1992, por el cual se organiza el servicio público de la educación superior
+PY  - 1992
+CY  - Bogotá, Colombia
+DA  - 28 dic. 1992
+ER  - 
+
+TY  - LEGAL
+AU  - Congreso de la República de Colombia
+TI  - Ley 1286 de 2009, por la cual se modifica la Ley 29 de 1990, se transforma a Colciencias en Departamento Administrativo, se fortalece el Sistema Nacional de Ciencia, Tecnología e Innovación en Colombia y se dictan otras disposiciones
+PY  - 2009
+CY  - Bogotá, Colombia
+DA  - 23 ene. 2009
+ER  - 
+
+TY  - LEGAL
+AU  - Congreso de la República de Colombia
+TI  - Ley 1341 de 2009, por la cual se definen principios y conceptos sobre la sociedad de la información y la organización de las Tecnologías de la Información y las Comunicaciones –TIC–, se crea la Agencia Nacional de Espectro y se dictan otras disposiciones
+PY  - 2009
+CY  - Bogotá, Colombia
+DA  - 30 jul. 2009
+ER  - 
+
+TY  - LEGAL
+AU  - Congreso de la República de Colombia
+TI  - Ley 1978 de 2019, por la cual se moderniza el sector de las Tecnologías de la Información y las Comunicaciones –TIC–, se distribuyen competencias, se crea un regulador único y se dictan otras disposiciones
+PY  - 2019
+CY  - Bogotá, Colombia
+DA  - 25 jul. 2019
+ER  - 
+
+TY  - LEGAL
+AU  - Presidencia de la República de Colombia
+TI  - Decreto 1377 de 2013, por el cual se reglamenta parcialmente la Ley 1581 de 2012
+PY  - 2013
+CY  - Bogotá, Colombia
+DA  - 27 jun. 2013
+ER  - 
+
+TY  - LEGAL
+AU  - Congreso de la República de Colombia
+TI  - Ley 23 de 1982, sobre derechos de autor
+PY  - 1982
+CY  - Bogotá, Colombia
+DA  - 28 ene. 1982
+ER  - 
+
+TY  - LEGAL
+AU  - Comisión del Acuerdo de Cartagena
+TI  - Decisión 351 de 1993, régimen común sobre derecho de autor y derechos conexos
+PY  - 1993
+CY  - Lima, Perú
+DA  - 17 dic. 1993
+ER  - 
+
+TY  - ELEC
+AU  - NVIDIA Corporation
+TI  - License agreement for NVIDIA software development kits (CUDA Toolkit EULA)
+PY  - 2025
+UR  - https://docs.nvidia.com/cuda/eula/index.html
+DA  - 2025
+ER  - 
+
+TY  - LEGAL
+AU  - Ministerio de Salud de Colombia
+TI  - Resolución 8430 de 1993, por la cual se establecen las normas científicas, técnicas y administrativas para la investigación en salud
+PY  - 1993
+CY  - Bogotá, Colombia
+DA  - 4 oct. 1993
+ER  - 
+
+TY  - LEGAL
+AU  - Ministerio de Educación Nacional de Colombia
+TI  - Decreto 1330 de 2019, por el cual se sustituye el Capítulo 2 y se suprime el Capítulo 7 del Título 3 de la Parte 5 del Libro 2 del Decreto 1075 de 2015 –Único Reglamentario del Sector Educación–
+PY  - 2019
+CY  - Bogotá, Colombia
+DA  - 25 jul. 2019
+ER  - 
+
+TY  - JOUR
+AU  - Lewis, J. R.
+TI  - The System Usability Scale: Past, present, and future
+T2  - Int. J. Hum.-Comput. Interact.
+PY  - 2018
+VL  - 34
+IS  - 7
+SP  - 577
+EP  - 590
+DO  - 10.1080/10447318.2018.1455307
+ER  - 
+
+TY  - BOOK
+AU  - Cohen, J.
+TI  - Statistical Power Analysis for the Behavioral Sciences
+PY  - 1988
+PB  - Lawrence Erlbaum
+CY  - Hillsdale, NJ, EE. UU.
+ER  - 
+
+TY  - JOUR
+AU  - Hake, R. R.
+TI  - Interactive-engagement versus traditional methods: A six-thousand-student survey of mechanics test data for introductory physics courses
+T2  - Am. J. Phys.
+PY  - 1998
+VL  - 66
+IS  - 1
+SP  - 64
+EP  - 74
+DO  - 10.1119/1.18809
+ER  - 
+
+TY  - JOUR
+AU  - Mahnič, V.
+TI  - A capstone course on agile software development using Scrum
+T2  - IEEE Trans. Educ.
+PY  - 2012
+VL  - 55
+IS  - 1
+SP  - 99
+EP  - 106
+DO  - 10.1109/TE.2011.2142311
+ER  - 
+
+TY  - ELEC
+AU  - IMS Global Learning Consortium (1EdTech)
+TI  - Learning Tools Interoperability core specification, Version 1.3
+PY  - 2019
+UR  - https://www.imsglobal.org/spec/lti/v1p3/
+DA  - abr. 2019
+ER  - 
+
